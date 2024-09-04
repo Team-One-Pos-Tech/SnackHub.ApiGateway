@@ -1,21 +1,21 @@
-@SnackHub.Gateway_HostAddress = http://localhost:5005
+@GatewayHostAddress = http://localhost:5005
 
-POST {{SnackHub.Gateway_HostAddress}}/clients-api
+POST {{GatewayHostAddress}}/clients-api
+Content-Type: application/json
 Accept: application/json
 
-{
-  "name": "John Doe",
-  "cpf": "57278480012"
-}
+{  "name": "John Doe", "cpf": "61189242010" }
 
 ###
 
-GET {{SnackHub.Gateway_HostAddress}}/clients-api/57278480012
+GET {{GatewayHostAddress}}/clients-api/61189242010
+Content-Type: application/json
 Accept: application/json
 
 ###
 
 GET {{SnackHub.Gateway_HostAddress}}/clients-api
+Content-Type: application/json
 Accept: application/json
 
-###
+####
