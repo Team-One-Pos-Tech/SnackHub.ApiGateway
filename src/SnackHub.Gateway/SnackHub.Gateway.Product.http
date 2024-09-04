@@ -1,0 +1,29 @@
+@GatewayHostAddress = http://localhost:5005
+@GatewayPath = product-api
+
+POST {{GatewayHostAddress}}/{{GatewayPath}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "X-Tudo",
+  "category": 0,
+  "price": 10.55,
+  "description": "Trem gostoso demais!"
+}
+
+###
+
+#Get Products by category
+GET {{GatewayHostAddress}}/{{GatewayPath}}/0
+Content-Type: application/json
+Accept: application/json
+
+###
+
+#Get products by Id
+GET {{GatewayHostAddress}}/{{GatewayPath}}/{Product Id}
+Content-Type: application/json
+Accept: application/json
+
+###
