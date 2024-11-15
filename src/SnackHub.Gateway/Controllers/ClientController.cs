@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SnackHub.Gateway.Models.Client;
+using SnackHub.Gateway.Services;
 
 namespace SnackHub.Api.Gateway.Controllers
 {
@@ -7,36 +7,32 @@ namespace SnackHub.Api.Gateway.Controllers
     [Route("client-api/v1")]
     public class ClientController : ControllerBase
     {
-        private readonly HttpClient _httpClient;
+        private readonly ClientService _clientService;
 
-        public ClientController(HttpClient httpClient)
+        public ClientController(ClientService clientService)
         {
-            _httpClient = httpClient;
+            _clientService = clientService;
         }
 
         [HttpGet("GetById")]
         public async Task<ActionResult> GetById([FromRoute] Guid id)
         {
-            // Define o URL do microserviço de Client para a requisição
-            var response = await _httpClient.GetAsync($"http://localhost:5000/api/client/v1/{id}");
+            var clientResponse = await _clientService.GetClientByIdAsync(id);
 
-            if (!response.IsSuccessStatusCode)
-                return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
+            if (clientResponse == null)
+                return NotFound("Client not found");
 
-            var clientResponse = await response.Content.ReadFromJsonAsync<GetClientResponse>();
             return Ok(clientResponse);
         }
 
         [HttpGet("GetByCpf")]
         public async Task<ActionResult> GetByCpf([FromRoute] string cpf)
         {
-            // Define o URL do microserviço de Client para a requisição
-            var response = await _httpClient.GetAsync($"http://localhost:5000/api/client/v1/{cpf}");
+            var clientResponse = await _clientService.GetClientByCpfAsync(cpf);
 
-            if (!response.IsSuccessStatusCode)
-                return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
+            if (clientResponse == null)
+                return NotFound("Client not found");
 
-            var clientResponse = await response.Content.ReadFromJsonAsync<GetClientResponse>();
             return Ok(clientResponse);
         }
     }

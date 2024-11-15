@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SnackHub.Gateway.Models.KitchenOrder;
+using SnackHub.Gateway.Services;
 
 namespace SnackHub.Gateway.Controllers
 {
@@ -7,35 +8,33 @@ namespace SnackHub.Gateway.Controllers
     [Route("api/kitchen-api/v1")]
     public class KitchenOrderController : ControllerBase
     {
-        private readonly HttpClient _httpClient;
+        private readonly KitchenOrderService _kitchenOrderService;
 
-        public KitchenOrderController(HttpClient httpClient)
+        public KitchenOrderController(KitchenOrderService kitchenOrderService)
         {
-            _httpClient = httpClient;
+            _kitchenOrderService = kitchenOrderService;
         }
 
         [HttpGet("GetAll")]
         public async Task<ActionResult> GetAll()
         {
-            var response = await _httpClient.GetAsync($"http://localhost:5000/api/kitchenOrder/v1/");
+            var kitchenOrderResponse = await _kitchenOrderService.GetAll();
 
-            if (!response.IsSuccessStatusCode)
-                return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
+            if (kitchenOrderResponse == null)
+                return NotFound("KitchenOrder not found");
 
-            var kitchenOrderResponse = await response.Content.ReadFromJsonAsync<KitchenOrderResponse>();
             return Ok(kitchenOrderResponse);
         }
 
         [HttpPut("UpdateStatus")]
         public async Task<ActionResult> UpdateStatus([FromRoute] Guid orderId)
         {
-            var response = await _httpClient.GetAsync($"http://localhost:5000/api/kitchenOrder/v1/{orderId}");
+            var kithenOrderResponse = await _kitchenOrderService.UpdateStatus(orderId);
 
-            if (!response.IsSuccessStatusCode)
-                return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
+            if (kithenOrderResponse == null)
+                return NotFound("KitchenOrder not found");
 
-            var kitchenOrderResponse = await response.Content.ReadFromJsonAsync<UpdateKitchenOrderStatusResponse>();
-            return Ok(kitchenOrderResponse);
+            return Ok(kithenOrderResponse);
         }
     }
 }
