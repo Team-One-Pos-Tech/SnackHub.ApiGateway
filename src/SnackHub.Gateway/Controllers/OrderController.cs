@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SnackHub.Gateway.Models.KitchenOrder;
 using SnackHub.Gateway.Models.Order;
+using SnackHub.Gateway.Services;
 using System.Net.Http.Json;
 
 namespace SnackHub.Api.Gateway.Controllers
@@ -8,77 +10,71 @@ namespace SnackHub.Api.Gateway.Controllers
     [Route("order-api/v1")]
     public class OrderController : ControllerBase
     {
-        private readonly HttpClient _httpClient;
+        private readonly OrderService _orderService;
 
-        public OrderController(HttpClient httpClient)
+        public OrderController(OrderService orderService)
         {
-            _httpClient = httpClient;
+            _orderService = orderService;
         }
 
         [HttpGet("GetAll")]
         public async Task<ActionResult> GetAll()
         {
-            var response = await _httpClient.GetAsync("http://localhost:5000/api/order/v1");
-            if (!response.IsSuccessStatusCode)
-                return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
+            var orderResponse = await _orderService.GetAll();
+            if (orderResponse == null)
+                return NotFound("Order not found");
 
-            var orders = await response.Content.ReadFromJsonAsync<IEnumerable<OrderResponse>>();
-            return Ok(orders);
+            return Ok(orderResponse);
         }
 
         [HttpPost("Confirm")]
         public async Task<ActionResult> Confirm([FromBody] ConfirmOrderRequest request)
         {
-            var response = await _httpClient.PostAsJsonAsync("http://localhost:5000/api/order/v1/Confirm", request);
-            if (!response.IsSuccessStatusCode)
-                return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
+            var orderResponse = await _orderService.Confirm(request);
+            if (orderResponse == null)
+                return NotFound("Order not found");
 
-            var confirmResponse = await response.Content.ReadFromJsonAsync<ConfirmOrderResponse>();
-            return Ok(confirmResponse);
+            return Ok(orderResponse);            
         }
 
         [HttpPut("Cancel")]
         public async Task<ActionResult> Cancel([FromBody] CancelOrderRequest request)
         {
-            var response = await _httpClient.PutAsJsonAsync("http://localhost:5000/api/order/v1/Cancel", request);
-            if (!response.IsSuccessStatusCode)
-                return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
+            var orderResponse = await _orderService.Cancel(request);
+            if (orderResponse == null)
+                return NotFound("Order not found");
 
-            var cancelResponse = await response.Content.ReadFromJsonAsync<CancelOrderResponse>();
-            return Ok(cancelResponse);
+            return Ok(orderResponse);
         }
 
         [HttpPost("Checkout")]
         public async Task<ActionResult> Checkout([FromBody] CheckoutOrderRequest request)
         {
-            var response = await _httpClient.PostAsJsonAsync("http://localhost:5000/api/order/v1/Checkout", request);
-            if (!response.IsSuccessStatusCode)
-                return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
+            var orderResponse = await _orderService.Checkout(request);
+            if (orderResponse == null)
+                return NotFound("Order not found");
 
-            var checkoutResponse = await response.Content.ReadFromJsonAsync<CheckoutOrderResponse>();
-            return Ok(checkoutResponse);
+            return Ok(orderResponse);
         }
 
         [HttpGet("{orderId:guid}/payment-status")]
         public async Task<ActionResult> CheckPaymentStatus(Guid orderId)
         {
-            var response = await _httpClient.GetAsync($"http://localhost:5000/api/order/v1/{orderId}/payment-status");
-            if (!response.IsSuccessStatusCode)
-                return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
+            var orderResponse = await _orderService.CheckPaymentStatus(orderId);
+            if (orderResponse == null)
+                return NotFound("Order not found");
 
-            var paymentStatusResponse = await response.Content.ReadFromJsonAsync<CheckPaymentStatusResponse>();
-            return Ok(paymentStatusResponse);
+            return Ok(orderResponse);
         }
 
         [HttpPut("{orderId:guid}/status")]
         public async Task<ActionResult> UpdateOrderStatus(Guid orderId)
         {
-            var response = await _httpClient.PutAsJsonAsync($"http://localhost:5000/api/order/v1/{orderId}/status", new { OrderId = orderId });
-            if (!response.IsSuccessStatusCode)
-                return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
+            var orderResponse = await _orderService.UpdateOrderStatus(orderId);
+            if (orderResponse == null)
+                return NotFound("Order not found");
 
-            var updateStatusResponse = await response.Content.ReadFromJsonAsync<UpdateOrderStatusResponse>();
-            return Ok(updateStatusResponse);
+            return Ok(orderResponse);
         }
     }
 }
