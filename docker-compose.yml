@@ -6,6 +6,8 @@ services:
       - snack-hub-network
     depends_on:
       - rabbitmq
+    ports:
+      - "5288:8080"
 
   rabbitmq:
     image: rabbitmq:4.0-management
@@ -19,20 +21,9 @@ services:
   snack-hub-production-db:
     image: postgres:latest
     container_name: snack-hub-production-db
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: SnackHub-ProductionService
     ports:
       - "5432:5432"
     networks:
       - snack-hub-network
     volumes:
       - snack-hub-production-db:/var/lib/postgresql/data
-
-volumes:
-  snack-hub-production-db:
-
-networks:
-  snack-hub-network:
-    driver: bridge

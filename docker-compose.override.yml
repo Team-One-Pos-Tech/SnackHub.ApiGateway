@@ -10,5 +10,17 @@ services:
         Storage__PostgreSQL__Database: SnackHub-ProductionService
         ASPNETCORE_ENVIRONMENT: Development
         ASPNETCORE_HTTP_PORTS: 8080
-    ports:
-      - "5288:8080"
+
+  snack-hub-production-db:
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: SnackHub-ProductionService
+
+
+volumes:
+  snack-hub-production-db:
+
+networks:
+  snack-hub-network:
+    driver: bridge
