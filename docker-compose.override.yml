@@ -4,10 +4,8 @@ services:
         RabbitMQ__Host: rabbitmq
         RabbitMQ__User: guest
         RabbitMQ__Password: guest
-        Storage__PostgreSQL__Host: snack-hub-db
-        Storage__PostgreSQL__User: postgres
-        Storage__PostgreSQL__Password: postgres
-        Storage__PostgreSQL__Database: snack-hub-order
+        Storage__MongoDb__ConnectionString: mongodb://admin:admin@snack-hub-mongodb:27017/
+        Storage__MongoDb__Database: snack-hub-order
         ASPNETCORE_ENVIRONMENT: Development
         ASPNETCORE_HTTP_PORTS: 8080
 
@@ -40,10 +38,8 @@ services:
         RabbitMQ__Host: rabbitmq
         RabbitMQ__User: guest
         RabbitMQ__Password: guest
-        Storage__PostgreSQL__Host: snack-hub-db
-        Storage__PostgreSQL__User: postgres
-        Storage__PostgreSQL__Password: postgres
-        Storage__PostgreSQL__Database: snack-hub-product
+        Storage__MongoDb__ConnectionString: mongodb://admin:admin@snack-hub-mongodb:27017/
+        Storage__MongoDb__Database: snack-hub-product
         ASPNETCORE_ENVIRONMENT: Development
         ASPNETCORE_HTTP_PORTS: 8080
 
