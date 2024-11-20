@@ -1,4 +1,15 @@
 services:
+  snack-hub-payment-app:
+    image: ghcr.io/team-one-pos-tech/snackhubpaymentapi:latest
+    container_name: snack-hub-payment-app
+    networks:
+      - snack-hub-network
+    depends_on:
+      - rabbitmq
+      - snack-hub-db
+    ports:
+      - "5588:8080"
+
   snack-hub-client-app:
     image: ghcr.io/team-one-pos-tech/snack-hub-client-service:latest
     container_name: snack-hub-client-app

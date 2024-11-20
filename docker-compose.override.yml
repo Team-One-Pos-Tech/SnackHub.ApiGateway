@@ -1,4 +1,16 @@
 services:
+  snack-hub-payment-app:
+    environment:
+        RabbitMQ__Host: rabbitmq
+        RabbitMQ__User: guest
+        RabbitMQ__Password: guest
+        Storage__PostgreSQL__Host: snack-hub-db
+        Storage__PostgreSQL__User: postgres
+        Storage__PostgreSQL__Password: postgres
+        Storage__PostgreSQL__Database: snack-hub-payment
+        ASPNETCORE_ENVIRONMENT: Development
+        ASPNETCORE_HTTP_PORTS: 8080
+
   snack-hub-client-app:
     environment:
         RabbitMQ__Host: rabbitmq
