@@ -55,6 +55,11 @@ services:
         ASPNETCORE_ENVIRONMENT: Development
         ASPNETCORE_HTTP_PORTS: 8080
 
+  snack-hub-gateway-app:
+    environment:
+        ASPNETCORE_ENVIRONMENT: Development
+        ASPNETCORE_HTTP_PORTS: 8080
+        
   snack-hub-db:
     environment:
       POSTGRES_USER: postgres

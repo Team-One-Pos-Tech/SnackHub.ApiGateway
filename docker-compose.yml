@@ -54,6 +54,14 @@ services:
     ports:
       - "5288:8080"
 
+  snack-hub-gateway-app:
+    image: ghcr.io/team-one-pos-tech/snack-hub-gateway:latest
+    container_name: snack-hub-gateway-app
+    networks:
+      - snack-hub-network
+    ports:
+      - "5188:8080"
+
   rabbitmq:
     image: rabbitmq:4.0-management
     container_name: rabbitmq
