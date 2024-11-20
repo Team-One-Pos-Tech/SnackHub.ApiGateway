@@ -1,23 +1,34 @@
 services:
-  snackhub.product.app:
+  snack-hub-client-app:
+    image: ghcr.io/team-one-pos-tech/snack-hub-client-service:latest
+    container_name: snack-hub-client-app
+    networks:
+      - snack-hub-network
+    depends_on:
+      - rabbitmq
+      - snack-hub-db
+    ports:
+      - "5488:8080"
+
+  snack-hub-product-app:
     image: ghcr.io/team-one-pos-tech/snack-hub-product-service:latest
     container_name: snack-hub-product-app
     networks:
       - snack-hub-network
     depends_on:
       - rabbitmq
-      - snack-hub-production-db
+      - snack-hub-db
     ports:
       - "5388:8080"
       
-  snackhub.production.app:
+  snack-hub-production-app:
     image: ghcr.io/team-one-pos-tech/snack-hub-production:latest
     container_name: snack-hub-production-app
     networks:
       - snack-hub-network
     depends_on:
       - rabbitmq
-      - snack-hub-production-db
+      - snack-hub-db
     ports:
       - "5288:8080"
 
@@ -30,12 +41,19 @@ services:
     networks:
        - snack-hub-network
 
-  snack-hub-production-db:
+  snack-hub-db:
     image: postgres:latest
-    container_name: snack-hub-production-db
+    container_name: snack-hub-db
     ports:
       - "5432:5432"
     networks:
       - snack-hub-network
     volumes:
-      - snack-hub-production-db:/var/lib/postgresql/data
+      - snack-hub-db:/var/lib/postgresql/data
+
+volumes:
+  snack-hub-db:
+
+networks:
+  snack-hub-network:
+    driver: bridge

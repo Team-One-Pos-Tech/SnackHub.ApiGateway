@@ -1,37 +1,41 @@
 services:
-  snackhub.production.app:
+  snack-hub-client-app:
     environment:
         RabbitMQ__Host: rabbitmq
         RabbitMQ__User: guest
         RabbitMQ__Password: guest
-        Storage__PostgreSQL__Host: snack-hub-production-db
+        Storage__PostgreSQL__Host: snack-hub-db
         Storage__PostgreSQL__User: postgres
         Storage__PostgreSQL__Password: postgres
-        Storage__PostgreSQL__Database: SnackHub-ProductionService
+        Storage__PostgreSQL__Database: snack-hub-client
         ASPNETCORE_ENVIRONMENT: Development
         ASPNETCORE_HTTP_PORTS: 8080
 
-  snack-hub-production-db:
+  snack-hub-product-app:
+    environment:
+        RabbitMQ__Host: rabbitmq
+        RabbitMQ__User: guest
+        RabbitMQ__Password: guest
+        Storage__PostgreSQL__Host: snack-hub-db
+        Storage__PostgreSQL__User: postgres
+        Storage__PostgreSQL__Password: postgres
+        Storage__PostgreSQL__Database: snack-hub-product
+        ASPNETCORE_ENVIRONMENT: Development
+        ASPNETCORE_HTTP_PORTS: 8080
+
+  snack-hub-production-app:
+    environment:
+        RabbitMQ__Host: rabbitmq
+        RabbitMQ__User: guest
+        RabbitMQ__Password: guest
+        Storage__PostgreSQL__Host: snack-hub-db
+        Storage__PostgreSQL__User: postgres
+        Storage__PostgreSQL__Password: postgres
+        Storage__PostgreSQL__Database: snack-hub-production
+        ASPNETCORE_ENVIRONMENT: Development
+        ASPNETCORE_HTTP_PORTS: 8080
+
+  snack-hub-db:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: SnackHub-ProductionService
-
-  snackhub.product.app:
-    environment:
-        RabbitMQ__Host: rabbitmq
-        RabbitMQ__User: guest
-        RabbitMQ__Password: guest
-        Storage__PostgreSQL__Host: snack-hub-production-db
-        Storage__PostgreSQL__User: postgres
-        Storage__PostgreSQL__Password: postgres
-        Storage__PostgreSQL__Database: SnackHub-ProductionService
-        ASPNETCORE_ENVIRONMENT: Development
-        ASPNETCORE_HTTP_PORTS: 8080
-
-volumes:
-  snack-hub-production-db:
-
-networks:
-  snack-hub-network:
-    driver: bridge
