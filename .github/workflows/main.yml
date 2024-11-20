@@ -3,12 +3,12 @@ jobs:
   build-and-test:
     uses: Team-One-Pos-Tech/SnackHub.SharedWorkFlows/.github/workflows/build.yml@main
     with:
-      solution-name: "SnackHub.Gateway.sln"
-      api-project-name: "SnackHub.Gateway.Api"
+      solution-name: "SnackHub.Api.Gateway.sln"
+      api-project-name: "SnackHub.Gateway"
       
   docker-setup:
     needs: build-and-test
     uses: Team-One-Pos-Tech/SnackHub.SharedWorkFlows/.github/workflows/dockerize.yml@main
     with:
       image-name: "team-one-pos-tech/snack-hub-gateway"
-      api-entrypoint-binary: "SnackHub.Gateway.Api.dll"
+      api-entrypoint-binary: "SnackHub.Gateway.dll"
