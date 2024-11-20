@@ -1,4 +1,15 @@
 services:
+  snackhub.product.app:
+    image: ghcr.io/team-one-pos-tech/snack-hub-product-service:latest
+    container_name: snack-hub-product-app
+    networks:
+      - snack-hub-network
+    depends_on:
+      - rabbitmq
+      - snack-hub-production-db
+    ports:
+      - "5388:8080"
+      
   snackhub.production.app:
     image: ghcr.io/team-one-pos-tech/snack-hub-production:latest
     container_name: snack-hub-production-app
@@ -6,6 +17,7 @@ services:
       - snack-hub-network
     depends_on:
       - rabbitmq
+      - snack-hub-production-db
     ports:
       - "5288:8080"
 
