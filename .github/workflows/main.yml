@@ -12,3 +12,24 @@ jobs:
     with:
       image-name: "team-one-pos-tech/snack-hub-gateway"
       api-entrypoint-binary: "SnackHub.Gateway.dll"
+
+  Deploy:
+    name: "Deploy development"
+    runs-on: [self-hosted, vmprod]
+    needs: build-and-test
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: '${{ github.actor }}'
+          password: '${{ secrets.GITHUB_TOKEN }}'
+      
+      - name: Docker Compose Down
+        run: docker compose down
+
+      - name: Docker Compose Up
+        run: docker compose up -d
