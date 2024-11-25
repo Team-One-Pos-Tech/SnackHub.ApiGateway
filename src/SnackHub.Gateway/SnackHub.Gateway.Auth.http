@@ -1,0 +1,19 @@
+@GatewayHostAddress = http://localhost:5005
+@GatewayPath = auth-api
+
+POST {{GatewayHostAddress}}/{{GatewayPath}}/signup
+Content-Type: application/json
+Accept: application/json
+
+{  "name": "John Doe", "cpf": "61189242010", "email": "rosquinha@mail.com" }
+
+###
+
+POST {{GatewayHostAddress}}/{{GatewayPath}}/signin
+Content-Type: application/json
+Accept: application/json
+
+{ "cpf": "61189242010" }
+
+###
+
