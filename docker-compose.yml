@@ -12,7 +12,7 @@ services:
       - "5688:8080"
 
   snack-hub-payment-app:
-    image: ghcr.io/team-one-pos-tech/snackhubpaymentapi:latest
+    image: ghcr.io/team-one-pos-tech/snack-hub-payment-service:latest
     container_name: snack-hub-payment-app
     restart: always
     networks:
