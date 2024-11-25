@@ -1,15 +1,9 @@
+### Should be executed to get data inserted by auth file
+
 @GatewayHostAddress = http://localhost:5005
 @GatewayPath = client-api
 
-POST {{GatewayHostAddress}}/{{GatewayPath}}
-Content-Type: application/json
-Accept: application/json
-
-{  "name": "John Doe", "cpf": "61189242010" }
-
-###
-
-GET {{GatewayHostAddress}}/{{GatewayPath}}/61189242010
+GET {{GatewayHostAddress}}/{{GatewayPath}}/client-api/{client-cpf}
 Content-Type: application/json
 Accept: application/json
 

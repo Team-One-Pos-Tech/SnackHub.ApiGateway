@@ -1,0 +1,46 @@
+@GatewayHostAddress = http://localhost:5005
+@GatewayPath = production-api
+
+
+### Better insert by consuming the ProductionOrderSubmittedRequest event from OrderService
+
+// Create Production Orders - Better only consume Order and Payment service
+POST {{GatewayHostAddress}}/{{GatewayPath}}/CreateProductionOrder
+Content-Type: application/json
+Accept: application/json
+
+// Where {Order id} is a order from Order Service
+
+{
+  "orderId": "{Order Id}",
+  "items": [
+    {
+      "productId": "{product-id}",
+      "quantity": 2
+    }
+  ]
+}
+
+###
+
+// List all Production Orders - no filters
+GET {{GatewayHostAddress}}/{{GatewayPath}}/GetAllProductionOrders
+Content-Type: application/json
+Accept: application/json
+
+###
+
+PUT {{GatewayHostAddress}}/{{GatewayPath}}/UpdateStatus
+Content-Type: application/json
+Accept: application/json
+
+// Will from {} => to {}
+// ProductionOrderStatus.Received => ProductionOrderStatus.Preparing,
+// ProductionOrderStatus.Preparing => ProductionOrderStatus.Done,
+// ProductionOrderStatus.Done => ProductionOrderStatus.Finished,
+
+{
+  "id": "{ProductionOrderId}"
+}
+
+####
