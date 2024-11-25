@@ -65,6 +65,12 @@ services:
     restart: always
     networks:
       - snack-hub-network
+    links:
+      - snack-hub-order-app
+      - snack-hub-payment-app
+      - snack-hub-client-app
+      - snack-hub-product-app
+      - snack-hub-production-app
     ports:
       - "5188:8080"
 
@@ -115,3 +121,5 @@ volumes:
 networks:
   snack-hub-network:
     driver: bridge
+    driver_opts:
+      com.docker.network.bridge.host_binding_ipv4: "127.0.0.1"
