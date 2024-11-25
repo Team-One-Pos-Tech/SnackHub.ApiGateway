@@ -10,5 +10,7 @@ builder
 
 var app = builder.Build();
 app.MapReverseProxy();
-app.UseHttpsRedirection();
+// Configure the HTTP request pipeline.
+if (bool.TryParse(builder.Configuration.GetSection("https").Value, out var result) && result)
+    app.UseHttpsRedirection();
 app.Run();
