@@ -1,4 +1,4 @@
-@GatewayHostAddress = http://localhost:5005
+@GatewayHostAddress = http://localhost:5688
 @GatewayPath = product-api
 
 POST {{GatewayHostAddress}}/{{GatewayPath}}
@@ -6,9 +6,9 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "name": "X-Tudo",
+  "name": "X-Abacaxi",
   "category": 0,
-  "price": 12.99,
+  "price": 9.99,
   "description": "Trem gostoso demais!"
 }
 

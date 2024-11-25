@@ -1,4 +1,4 @@
-@GatewayHostAddress = http://localhost:5005
+@GatewayHostAddress = http://localhost:5688
 @GatewayPath = order-api
 
 
@@ -10,11 +10,11 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "clientId": "{client-id}",
+  "clientId": "cb327be2-dff9-4288-903d-248bcdf9b08d",
   "items": [
     {
-      "productId": "{product-id}",
-      "quantity": 2
+      "productId": "043eff2e-491c-470e-88aa-7db16b2cbb00",
+      "quantity": 3
     }
   ]
 }

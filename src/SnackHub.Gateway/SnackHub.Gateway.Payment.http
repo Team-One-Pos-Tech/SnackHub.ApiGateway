@@ -1,17 +1,17 @@
-@GatewayHostAddress = http://localhost:5005
+@GatewayHostAddress = http://localhost:5688
 @GatewayPath = payment-api
 
 
 // Get transactions by TransactionState
 // Available values : Accepted, Refused, Approved, Rejected, Canceled
-GET {{GatewayHostAddress}}/{{GatewayPath}}/{transaction-state}
+GET {{GatewayHostAddress}}/{{GatewayPath}}/Accepted
 Content-Type: application/json
 Accept: application/json
 
 ###
 
 // Approve an payment transaction
-POST {{GatewayHostAddress}}/{{GatewayPath}}/approve/{transaction-id}
+POST {{GatewayHostAddress}}/{{GatewayPath}}/approve/ccd44d07-8310-4061-a37b-173257cd2066
 Content-Type: application/json
 Accept: application/json
 
