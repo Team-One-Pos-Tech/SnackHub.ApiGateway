@@ -65,7 +65,7 @@ services:
     restart: always
     networks:
       - snack-hub-network
-    links:
+    depends_on:
       - snack-hub-order-app
       - snack-hub-payment-app
       - snack-hub-client-app

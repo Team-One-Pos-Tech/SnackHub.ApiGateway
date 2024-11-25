@@ -60,12 +60,6 @@ services:
     environment:
         ASPNETCORE_ENVIRONMENT: Development
         ASPNETCORE_HTTP_PORTS: 8080
-        ORDER-CLUSTER__DESTINATIONS__DOCKER-COMPOSE__ADDRESS: snack-hub-order-app:5688
-        PAYMENT-CLUSTER__DESTINATIONS__DOCKER-COMPOSE__ADDRESS: snack-hub-payment-app:5588
-        CLIENT-CLUSTER__DESTINATIONS__DOCKER-COMPOSE__ADDRESS: snack-hub-client-app:5488
-        PRODUCT-CLUSTER__DESTINATIONS__DOCKER-COMPOSE__ADDRESS: snack-hub-product-app:5388
-        PRODUCTION-CLUSTER__DESTINATIONS__DOCKER-COMPOSE__ADDRESS: snack-hub-production-app:5288
-
         
   snack-hub-db:
     environment:
