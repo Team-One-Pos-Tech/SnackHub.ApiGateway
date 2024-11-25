@@ -18,6 +18,7 @@ services:
         Storage__PostgreSQL__User: postgres
         Storage__PostgreSQL__Password: postgres
         Storage__PostgreSQL__Database: snack-hub-payment
+        ApiGateway__MercadoPagoEndpoint: https://api.mercadopago.com
         ASPNETCORE_ENVIRONMENT: Development
         ASPNETCORE_HTTP_PORTS: 8080
 
