@@ -67,11 +67,6 @@ services:
       - snack-hub-network
     ports:
       - "5188:8080"
-      - "5288:5288"
-      - "5388:5388"
-      - "5488:5488"
-      - "5588:5588"
-      - "5688:5688"
 
   rabbitmq:
     image: rabbitmq:4.0-management

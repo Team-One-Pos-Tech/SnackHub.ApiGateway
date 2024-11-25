@@ -1,4 +1,4 @@
-@GatewayHostAddress = http://localhost:5688
+@GatewayHostAddress = http://localhost:5188
 @GatewayPath = production-api
 
 

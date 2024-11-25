@@ -1,6 +1,6 @@
 // Should be executed to get data inserted by auth file
 
-@GatewayHostAddress = http://localhost:5688
+@GatewayHostAddress = http://localhost:5188
 @GatewayPath = client-api
 
 ###
