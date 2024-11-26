@@ -60,11 +60,11 @@ services:
     environment:
         ASPNETCORE_ENVIRONMENT: Development
         ASPNETCORE_HTTP_PORTS: 8080
-        ReverseProxy__Clusters__ORDER-CLUSTER__DESTINATIONS__DOCKER-COMPOSE__ADDRESS: http://snack-hub-order-app:5688
-        ReverseProxy__Clusters__PAYMENT-CLUSTER__DESTINATIONS__DOCKER-COMPOSE__ADDRESS: http://snack-hub-payment-app:5588
-        ReverseProxy__Clusters__CLIENT-CLUSTER__DESTINATIONS__DOCKER-COMPOSE__ADDRESS: http://snack-hub-client-app:5488
-        ReverseProxy__Clusters__PRODUCT-CLUSTER__DESTINATIONS__DOCKER-COMPOSE__ADDRESS: http://snack-hub-product-app:5388
-        ReverseProxy__Clusters__PRODUCTION-CLUSTER__DESTINATIONS__DOCKER-COMPOSE__ADDRESS: http://snack-hub-production-app:5288
+        ReverseProxy__Clusters__ORDER-CLUSTER__DESTINATIONS__DOCKER-COMPOSE__ADDRESS: https://snackhuborderapidev.kallesoft.com.br
+        ReverseProxy__Clusters__PAYMENT-CLUSTER__DESTINATIONS__DOCKER-COMPOSE__ADDRESS: https://snackhubpaymentdev.kallesoft.com.br
+        ReverseProxy__Clusters__CLIENT-CLUSTER__DESTINATIONS__DOCKER-COMPOSE__ADDRESS: https://snackhubclientdev.kallesoft.com.br
+        ReverseProxy__Clusters__PRODUCT-CLUSTER__DESTINATIONS__DOCKER-COMPOSE__ADDRESS: https://snackhubproductdev.kallesoft.com.br
+        ReverseProxy__Clusters__PRODUCTION-CLUSTER__DESTINATIONS__DOCKER-COMPOSE__ADDRESS: https://snackhubproductiondev.kallesoft.com.br
 
         
   snack-hub-db:
