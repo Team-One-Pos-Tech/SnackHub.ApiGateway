@@ -1,0 +1,46 @@
+@GatewayHostAddress = http://localhost:5188
+@GatewayPath = order-api
+
+
+### Better insert by consuming the ProductionOrderSubmittedRequest event from OrderService
+
+// Create Orders
+POST {{GatewayHostAddress}}/{{GatewayPath}}/Confirm
+Content-Type: application/json
+Accept: application/json
+
+{
+  "clientId": "1a296169-ac6e-431d-ae8e-148b6a458c93",
+  "items": [
+    {
+      "productId": "0a2a1d42-5b08-45d7-83c8-5b9bb25b0aaa",
+      "quantity": 3
+    }
+  ]
+}
+
+###
+
+// List all Orders - no filters
+GET {{GatewayHostAddress}}/{{GatewayPath}}
+Content-Type: application/json
+Accept: application/json
+
+###
+
+// List Order Payment Status
+GET {{GatewayHostAddress}}/{{GatewayPath}}/{order-id}/payment-status
+Content-Type: application/json
+Accept: application/json
+
+###
+
+PUT {{GatewayHostAddress}}/{{GatewayPath}}/Cancel
+Content-Type: application/json
+Accept: application/json
+
+{
+  "orderId": "{order-id}"
+}
+
+####

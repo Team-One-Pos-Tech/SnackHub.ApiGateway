@@ -1,4 +1,4 @@
-@GatewayHostAddress = http://localhost:5005
+@GatewayHostAddress = http://localhost:5188
 @GatewayPath = product-api
 
 POST {{GatewayHostAddress}}/{{GatewayPath}}
@@ -6,10 +6,23 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "name": "X-Tudo",
+  "name": "X-Abacaxi",
   "category": 0,
-  "price": 10.55,
+  "price": 9.99,
   "description": "Trem gostoso demais!"
+}
+
+###
+
+POST {{GatewayHostAddress}}/{{GatewayPath}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Coca-Cola",
+  "category": 2,
+  "price": 7.45,
+  "description": "Coca geladinha!"
 }
 
 ###
@@ -23,6 +36,20 @@ Accept: application/json
 
 #Get products by Id
 GET {{GatewayHostAddress}}/{{GatewayPath}}/{Product Id}
+Content-Type: application/json
+Accept: application/json
+
+###
+
+#List all products
+GET {{GatewayHostAddress}}/{{GatewayPath}}
+Content-Type: application/json
+Accept: application/json
+
+###
+
+#Delete products by Id
+DELETE {{GatewayHostAddress}}/{{GatewayPath}}/{Product Id}
 Content-Type: application/json
 Accept: application/json
 
