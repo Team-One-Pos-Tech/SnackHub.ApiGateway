@@ -40,7 +40,7 @@ Accept: application/json
 // ProductionOrderStatus.Done => ProductionOrderStatus.Finished,
 
 {
-  "id": "{ProductionOrderId}"
+  "id": "a13ce85a-be6a-42b9-904e-d77c26379cb6"
 }
 
 ####

@@ -11,7 +11,7 @@ Accept: application/json
 ###
 
 // Approve an payment transaction
-POST {{GatewayHostAddress}}/{{GatewayPath}}/approve/ccd44d07-8310-4061-a37b-173257cd2066
+POST {{GatewayHostAddress}}/{{GatewayPath}}/approve/4acc69d3-669a-4be8-abc7-6c93c9f82e5f
 Content-Type: application/json
 Accept: application/json
 

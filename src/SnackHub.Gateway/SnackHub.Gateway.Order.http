@@ -10,10 +10,10 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "clientId": "cb327be2-dff9-4288-903d-248bcdf9b08d",
+  "clientId": "1a296169-ac6e-431d-ae8e-148b6a458c93",
   "items": [
     {
-      "productId": "043eff2e-491c-470e-88aa-7db16b2cbb00",
+      "productId": "0a2a1d42-5b08-45d7-83c8-5b9bb25b0aaa",
       "quantity": 3
     }
   ]
