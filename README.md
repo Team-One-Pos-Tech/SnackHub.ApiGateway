@@ -76,77 +76,164 @@ Este projeto é um gateway API que gerencia os serviços da aplicação SnackHub
    ```bash
    git clone https://github.com/Team-One-Pos-Tech/SnackHub.ApiGateway.git
 
-2. Suba os containers Docker:
-   Utilize o comando abaixo para iniciar todos os serviços necessários:
-   ```bash
-   docker-compose up -d
-  ``
-   Após executar o comando, verifique se os serviços estão funcionando corretamente:
-   - Gateway: Acesse http://localhost:5188.
-   - RabbitMQ: Acesse http://localhost:15672 com as credenciais padrão:
-     - Usuário: guest
-     - Senha: guest.
+### Suba os Containers Docker
 
-4. Configure as Variáveis de Ambiente:
-   Certifique-se de que os seguintes valores estão configurados em cada serviço:
+Execute o seguinte comando para iniciar os serviços Docker:
 
-   - RabbitMQ:
-     RabbitMQ__Host: rabbitmq
-     RabbitMQ__User: guest
-     RabbitMQ__Password: guest
+```bash
+docker-compose up -d
+```
 
-   - MongoDB:
-     Storage__MongoDb__ConnectionString: mongodb://admin:admin@snack-hub-mongodb:27017/
-     Storage__MongoDb__Database: Nome do banco correspondente.
+### Verifique os Serviços
 
-   - PostgreSQL:
-     Storage__PostgreSQL__Host: snack-hub-db
-     Storage__PostgreSQL__User: postgres
-     Storage__PostgreSQL__Password: postgres
-     Storage__PostgreSQL__Database: Nome do banco correspondente.
+Após iniciar os containers, certifique-se de que os seguintes serviços estão disponíveis:
 
-5. Teste os Arquivos `.http`:
-   Utilize os arquivos `.http` para testar a API diretamente. Eles contêm exemplos de requisições que podem ser executadas em ferramentas como Rest Client no Visual Studio Code.
+- **Gateway**: [http://localhost:5188](http://localhost:5188)  
+- **RabbitMQ**: [http://localhost:15672](http://localhost:15672)  
+  - Usuário: `guest`
+  - Senha: `guest`
 
-   Exemplos de requisições:
+### Configure as Variáveis de Ambiente
 
-   - Autenticação (`auth-api`):
-     @GatewayHostAddress = http://localhost:5188
-     @GatewayPath = auth-api
+Certifique-se de que as variáveis de ambiente estão configuradas corretamente para os serviços.
 
-     POST {{GatewayHostAddress}}/{{GatewayPath}}/signup
-     Content-Type: application/json
-     Accept: application/json
+#### RabbitMQ
+- `RabbitMQ__Host`: `rabbitmq`  
+- `RabbitMQ__User`: `guest`  
+- `RabbitMQ__Password`: `guest`
 
-     {
-       "name": "John Doe",
-       "cpf": "61189242010",
-       "email": "rosquinha@mail.com"
-     }
+#### MongoDB
+- `Storage__MongoDb__ConnectionString`: `mongodb://admin:admin@snack-hub-mongodb:27017/`  
+- `Storage__MongoDb__Database`: Nome do banco correspondente.
 
-   - Pedidos (`order-api`):
-     @GatewayHostAddress = http://localhost:5188
-     @GatewayPath = order-api
+#### PostgreSQL
+- `Storage__PostgreSQL__Host`: `snack-hub-db`  
+- `Storage__PostgreSQL__User`: `postgres`  
+- `Storage__PostgreSQL__Password`: `postgres`  
+- `Storage__PostgreSQL__Database`: Nome do banco correspondente.
 
-     POST {{GatewayHostAddress}}/{{GatewayPath}}/Confirm
-     Content-Type: application/json
-     Accept: application/json
+---
 
-     {
-       "clientId": "1a296169-ac6e-431d-ae8e-148b6a458c93",
-       "items": [
-         {
-           "productId": "0a2a1d42-5b08-45d7-83c8-5b9bb25b0aaa",
-           "quantity": 3
-         }
-       ]
-     }
+## Testando as APIs
 
-   - Pagamentos (`payment-api`):
-     @GatewayHostAddress = http://localhost:5188
-     @GatewayPath = payment-api
+Os arquivos `.http` disponíveis no projeto contêm exemplos de requisições para testar as APIs. Use ferramentas como o [Rest Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) no Visual Studio Code.
 
-     GET {{GatewayHostAddress}}/{{GatewayPath}}/Accepted
-     Content-Type: application/json
-     Accept: application/json
+### Exemplos de Requisições
 
+#### Auth API
+
+- **`POST /signup`**  
+  Exemplo de payload:  
+  ```json
+  {
+    "name": "John Doe",
+    "cpf": "61189242010",
+    "email": "rosquinha@mail.com"
+  }
+  ```
+
+- **`POST /signin`**  
+  Exemplo de payload:  
+  ```json
+  {
+    "cpf": "61189242010"
+  }
+  ```
+
+---
+
+#### Order API
+
+- **`POST /Confirm`**  
+  Exemplo de payload:  
+  ```json
+  {
+    "clientId": "1a296169-ac6e-431d-ae8e-148b6a458c93",
+    "items": [
+      {
+        "productId": "0a2a1d42-5b08-45d7-83c8-5b9bb25b0aaa",
+        "quantity": 3
+      }
+    ]
+  }
+  ```
+
+- **`GET /{order-id}/payment-status`**  
+  Sem payload.
+
+---
+
+#### Payment API
+
+- **`GET /Accepted`**  
+  Sem payload.
+
+- **`POST /approve/{transaction-id}`**  
+  Sem payload.
+
+---
+
+#### Product API
+
+- **`POST /`**  
+  Exemplo de payload:  
+  ```json
+  {
+    "name": "Coca-Cola",
+    "category": 2,
+    "price": 7.45,
+    "description": "Coca geladinha!"
+  }
+  ```
+
+- **`GET /0`**  
+  Sem payload.
+
+---
+
+#### Production API
+
+- **`POST /CreateProductionOrder`**  
+  Exemplo de payload:  
+  ```json
+  {
+    "orderId": "{Order Id}",
+    "items": [
+      {
+        "productId": "{product-id}",
+        "quantity": 2
+      }
+    ]
+  }
+  ```
+
+- **`GET /GetAllProductionOrders`**  
+  Sem payload.
+
+---
+
+## Serviços Disponíveis
+
+- **`snack-hub-order-app`**  
+  - Porta: `5688`  
+  - Banco: MongoDB (`snack-hub-order`)
+
+- **`snack-hub-payment-app`**  
+  - Porta: `5689`  
+  - Banco: PostgreSQL (`snack-hub-payment`)
+
+- **`snack-hub-gateway`**  
+  - Porta: `5188`
+
+---
+
+## Observações
+
+- Certifique-se de que todas as APIs estão funcionando corretamente antes de avançar para as integrações.  
+- Para mais informações sobre os serviços, consulte a documentação específica de cada API.
+
+---
+
+## Licença
+
+Este projeto está licenciado sob a [MIT License](LICENSE).
