@@ -2,6 +2,10 @@
 
 This project is an API gateway that manages the SnackHub application services, organized into microservices for ordering, payments, customers, products and production functionality. The system uses Docker for orchestration and dependencies such as RabbitMQ, MongoDB and PostgreSQL.
 
+## Documentation Resources
+More about the Architecture Overview [here](https://github.com/Team-One-Pos-Tech/SnackHub.ApiGateway/wiki/Architecture-Overview)
+More about the Message Broker events catalog [here](https://github.com/Team-One-Pos-Tech/SnackHub.ApiGateway/wiki/Events-Catalog)
+
 ## Project Structure
 
 - **SnackHub.Gateway**: API gateway that centralizes communication routes between microservices.
