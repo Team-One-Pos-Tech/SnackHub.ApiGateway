@@ -75,3 +75,77 @@ Este projeto é um gateway API que gerencia os serviços da aplicação SnackHub
 1. Clone o repositório:
    ```bash
    git clone https://github.com/Team-One-Pos-Tech/SnackHub.ApiGateway.git
+
+2. Suba os containers Docker:
+   Utilize o comando abaixo para iniciar todos os serviços necessários:
+   docker-compose up -d
+
+   Após executar o comando, verifique se os serviços estão funcionando corretamente:
+   - Gateway: Acesse http://localhost:5188.
+   - RabbitMQ: Acesse http://localhost:15672 com as credenciais padrão:
+     - Usuário: guest
+     - Senha: guest.
+
+3. Configure as Variáveis de Ambiente:
+   Certifique-se de que os seguintes valores estão configurados em cada serviço:
+
+   - RabbitMQ:
+     RabbitMQ__Host: rabbitmq
+     RabbitMQ__User: guest
+     RabbitMQ__Password: guest
+
+   - MongoDB:
+     Storage__MongoDb__ConnectionString: mongodb://admin:admin@snack-hub-mongodb:27017/
+     Storage__MongoDb__Database: Nome do banco correspondente.
+
+   - PostgreSQL:
+     Storage__PostgreSQL__Host: snack-hub-db
+     Storage__PostgreSQL__User: postgres
+     Storage__PostgreSQL__Password: postgres
+     Storage__PostgreSQL__Database: Nome do banco correspondente.
+
+4. Teste os Arquivos `.http`:
+   Utilize os arquivos `.http` para testar a API diretamente. Eles contêm exemplos de requisições que podem ser executadas em ferramentas como Rest Client no Visual Studio Code.
+
+   Exemplos de requisições:
+
+   - Autenticação (`auth-api`):
+     @GatewayHostAddress = http://localhost:5188
+     @GatewayPath = auth-api
+
+     POST {{GatewayHostAddress}}/{{GatewayPath}}/signup
+     Content-Type: application/json
+     Accept: application/json
+
+     {
+       "name": "John Doe",
+       "cpf": "61189242010",
+       "email": "rosquinha@mail.com"
+     }
+
+   - Pedidos (`order-api`):
+     @GatewayHostAddress = http://localhost:5188
+     @GatewayPath = order-api
+
+     POST {{GatewayHostAddress}}/{{GatewayPath}}/Confirm
+     Content-Type: application/json
+     Accept: application/json
+
+     {
+       "clientId": "1a296169-ac6e-431d-ae8e-148b6a458c93",
+       "items": [
+         {
+           "productId": "0a2a1d42-5b08-45d7-83c8-5b9bb25b0aaa",
+           "quantity": 3
+         }
+       ]
+     }
+
+   - Pagamentos (`payment-api`):
+     @GatewayHostAddress = http://localhost:5188
+     @GatewayPath = payment-api
+
+     GET {{GatewayHostAddress}}/{{GatewayPath}}/Accepted
+     Content-Type: application/json
+     Accept: application/json
+
