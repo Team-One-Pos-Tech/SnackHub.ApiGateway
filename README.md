@@ -158,19 +158,6 @@ Os arquivos `.http` disponíveis no projeto contêm exemplos de requisições pa
   }
   ```
 
-- **`GET /{order-id}/payment-status`**  
-  Sem payload.
-
----
-
-#### Payment API
-
-- **`GET /Accepted`**  
-  Sem payload.
-
-- **`POST /approve/{transaction-id}`**  
-  Sem payload.
-
 ---
 
 #### Product API
@@ -185,9 +172,6 @@ Os arquivos `.http` disponíveis no projeto contêm exemplos de requisições pa
     "description": "Coca geladinha!"
   }
   ```
-
-- **`GET /0`**  
-  Sem payload.
 
 ---
 
@@ -206,9 +190,6 @@ Os arquivos `.http` disponíveis no projeto contêm exemplos de requisições pa
     ]
   }
   ```
-
-- **`GET /GetAllProductionOrders`**  
-  Sem payload.
 
 ---
 
