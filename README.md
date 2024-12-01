@@ -78,15 +78,16 @@ Este projeto é um gateway API que gerencia os serviços da aplicação SnackHub
 
 2. Suba os containers Docker:
    Utilize o comando abaixo para iniciar todos os serviços necessários:
+   ```bash
    docker-compose up -d
-
+  ``
    Após executar o comando, verifique se os serviços estão funcionando corretamente:
    - Gateway: Acesse http://localhost:5188.
    - RabbitMQ: Acesse http://localhost:15672 com as credenciais padrão:
      - Usuário: guest
      - Senha: guest.
 
-3. Configure as Variáveis de Ambiente:
+4. Configure as Variáveis de Ambiente:
    Certifique-se de que os seguintes valores estão configurados em cada serviço:
 
    - RabbitMQ:
@@ -104,7 +105,7 @@ Este projeto é um gateway API que gerencia os serviços da aplicação SnackHub
      Storage__PostgreSQL__Password: postgres
      Storage__PostgreSQL__Database: Nome do banco correspondente.
 
-4. Teste os Arquivos `.http`:
+5. Teste os Arquivos `.http`:
    Utilize os arquivos `.http` para testar a API diretamente. Eles contêm exemplos de requisições que podem ser executadas em ferramentas como Rest Client no Visual Studio Code.
 
    Exemplos de requisições:
