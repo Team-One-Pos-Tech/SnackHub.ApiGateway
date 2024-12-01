@@ -1,6 +1,26 @@
 @GatewayHostAddress = http://localhost:5188
 @GatewayPath = production-api
 
+// List all Production Orders - no filters
+GET {{GatewayHostAddress}}/{{GatewayPath}}/GetAllProductionOrders
+Content-Type: application/json
+Accept: application/json
+###
+
+PUT {{GatewayHostAddress}}/{{GatewayPath}}/UpdateStatus
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id": "{production-order-id}"
+}
+####
+// ProductionOrderStatus.Received => ProductionOrderStatus.Preparing,
+// ProductionOrderStatus.Preparing => ProductionOrderStatus.Done,
+// ProductionOrderStatus.Done => ProductionOrderStatus.Finished,
+
+####
+
 
 ### Better insert by consuming the ProductionOrderSubmittedRequest event from OrderService
 
@@ -22,25 +42,3 @@ Accept: application/json
 }
 
 ###
-
-// List all Production Orders - no filters
-GET {{GatewayHostAddress}}/{{GatewayPath}}/GetAllProductionOrders
-Content-Type: application/json
-Accept: application/json
-
-###
-
-PUT {{GatewayHostAddress}}/{{GatewayPath}}/UpdateStatus
-Content-Type: application/json
-Accept: application/json
-
-// Will from {} => to {}
-// ProductionOrderStatus.Received => ProductionOrderStatus.Preparing,
-// ProductionOrderStatus.Preparing => ProductionOrderStatus.Done,
-// ProductionOrderStatus.Done => ProductionOrderStatus.Finished,
-
-{
-  "id": "a13ce85a-be6a-42b9-904e-d77c26379cb6"
-}
-
-####

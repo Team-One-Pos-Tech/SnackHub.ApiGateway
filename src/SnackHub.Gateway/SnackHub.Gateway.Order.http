@@ -5,16 +5,20 @@
 ### Better insert by consuming the ProductionOrderSubmittedRequest event from OrderService
 
 // Create Orders
-POST {{GatewayHostAddress}}/{{GatewayPath}}/Confirm
+POST {{GatewayHostAddress}}/{{GatewayPath}}/
 Content-Type: application/json
 Accept: application/json
 
 {
-  "clientId": "1a296169-ac6e-431d-ae8e-148b6a458c93",
+  "clientId": "{client-id}",
   "items": [
     {
-      "productId": "0a2a1d42-5b08-45d7-83c8-5b9bb25b0aaa",
+      "productId": "b04d4264-cc63-4cb0-851d-981bd34aa725",
       "quantity": 3
+    },
+    {
+      "productId": "a869d0bc-fccb-4d4c-8b5a-38840d50b6e8",
+      "quantity": 1
     }
   ]
 }
@@ -35,6 +39,13 @@ Accept: application/json
 
 ###
 
+// Get Order By Id
+GET {{GatewayHostAddress}}/{{GatewayPath}}/{order-id}
+Content-Type: application/json
+Accept: application/json
+
+###
+
 PUT {{GatewayHostAddress}}/{{GatewayPath}}/Cancel
 Content-Type: application/json
 Accept: application/json
@@ -42,5 +53,3 @@ Accept: application/json
 {
   "orderId": "{order-id}"
 }
-
-####
