@@ -4,6 +4,7 @@ This project is an API gateway that manages the SnackHub application services, o
 
 ## Documentation Resources
 More about the Architecture Overview [here](https://github.com/Team-One-Pos-Tech/SnackHub.ApiGateway/wiki/Architecture-Overview)
+
 More about the Message Broker events catalog [here](https://github.com/Team-One-Pos-Tech/SnackHub.ApiGateway/wiki/Events-Catalog)
 
 ## Project Structure
