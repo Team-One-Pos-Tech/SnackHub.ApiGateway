@@ -1,220 +1,221 @@
 # SnackHub API Gateway Project
 
-Este projeto é um gateway API que gerencia os serviços da aplicação SnackHub, organizados em microserviços para funcionalidade de pedidos, pagamentos, clientes, produtos e produção. O sistema utiliza Docker para orquestração e dependências como RabbitMQ, MongoDB e PostgreSQL.
+This project is an API gateway that manages the SnackHub application services, organized into microservices for ordering, payments, customers, products and production functionality. The system uses Docker for orchestration and dependencies such as RabbitMQ, MongoDB and PostgreSQL.
 
-## Estrutura do Projeto
+## Project Structure
 
-- **SnackHub.Gateway**: Gateway API que centraliza as rotas de comunicação entre os microserviços.
-- **Microserviços**:
-  - `snack-hub-order-app`: Gerencia pedidos.
-  - `snack-hub-payment-app`: Gerencia pagamentos.
-  - `snack-hub-client-app`: Gerencia informações de clientes.
-  - `snack-hub-product-app`: Gerencia produtos.
-  - `snack-hub-production-app`: Gerencia produção.
-- **Dependências**:
-  - `RabbitMQ`: Fila de mensagens para comunicação entre serviços.
-  - `MongoDB`: Banco de dados usado por alguns serviços.
-  - `PostgreSQL`: Banco de dados usado por outros serviços.
+- **SnackHub.Gateway**: API gateway that centralizes communication routes between microservices.
+- **Microservices**:
+- `snack-hub-order-app`: Manages orders.
+- `snack-hub-payment-app`: Manages payments.
+- `snack-hub-client-app`: Manages customer information.
+- `snack-hub-product-app`: Manages products.
+- `snack-hub-production-app`: Manages production.
+- **Dependencies**:
+- `RabbitMQ`: Message queue for communication between services.
+- `MongoDB`: Database used by some services.
+- `PostgreSQL`: Database used by other services.
 
-## Tecnologias Utilizadas
+## Technologies Used
 
-- **Docker**: Orquestração de containers.
-- **RabbitMQ**: Comunicação entre microserviços.
-- **MongoDB e PostgreSQL**: Bancos de dados para armazenamento.
-- **ASP.NET Core**: Desenvolvimento dos microserviços e do gateway.
+- **Docker**: Container orchestration.
+- **RabbitMQ**: Communication between microservices.
+- **MongoDB and PostgreSQL**: Databases for storage.
+- **ASP.NET Core**: Development of microservices and the gateway.
 
-## Pré-requisitos
+## Prerequisites
 
-- Docker e Docker Compose instalados.
-- Porta 8080 liberada para comunicação.
+- Docker and Docker Compose installed.
+- Port 8080 released for communication.
 
-## Configuração dos Containers
+## Container Configuration
 
-### Serviços
+### Services
 
 - **`snack-hub-order-app`**
-  - Porta: `5688`
-  - Banco: MongoDB (`snack-hub-order`)
+- Port: `5688`
+- Database: MongoDB (`snack-hub-order`)
 
 - **`snack-hub-payment-app`**
-  - Porta: `5588`
-  - Banco: PostgreSQL (`snack-hub-payment`)
-  - Integração: Mercado Pago API
+- Port: `5588`
+- Database: PostgreSQL (`snack-hub-payment`)
+- Integration: Mercado Pago API
 
 - **`snack-hub-client-app`**
-  - Porta: `5488`
-  - Banco: PostgreSQL (`snack-hub-client`)
+- Port: `5488`
+- Database: PostgreSQL (`snack-hub-client`)
 
 - **`snack-hub-product-app`**
-  - Porta: `5388`
-  - Banco: MongoDB (`snack-hub-product`)
+- Port: `5388`
+- Database: MongoDB (`snack-hub-product`)
 
 - **`snack-hub-production-app`**
-  - Porta: `5288`
-  - Banco: PostgreSQL (`snack-hub-production`)
+- Port: `5288`
+- Database: PostgreSQL (`snack-hub-production`)
 
 - **`snack-hub-gateway-app`**
-  - Porta: `5188`
-  - Roteamento de APIs.
+- Port: `5188`
+- API routing.
 
-### Dependências
+### Dependencies
 
 - **RabbitMQ**
-  - Porta: `5672` (Fila) e `15672` (Painel de administração).
+- Port: `5672` (Queue) and `15672` (Admin Panel).
 
 - **PostgreSQL**
-  - Porta: `5432`
-  - Banco de dados usado pelos serviços `payment-app`, `client-app` e `production-app`.
+- Port: `5432`
+- Database used by `payment-app`, `client-app` and `production-app` services.
 
 - **MongoDB**
-  - Porta: `27017`
-  - Banco de dados usado pelos serviços `order-app` e `product-app`.
+- Port: `27017`
+- Database used by `order-app` and `product-app` services.
 
-## Como Executar
+## How to Run
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/Team-One-Pos-Tech/SnackHub.ApiGateway.git
+1. Clone the repository:
+```bash
+git clone https://github.com/Team-One-Pos-Tech/SnackHub.ApiGateway.git
 
-### Suba os Containers Docker
+### Start the Docker Containers
 
-Execute o seguinte comando para iniciar os serviços Docker:
+Run the following command to start the Docker services:
 
 ```bash
 docker-compose up -d
 ```
 
-### Verifique os Serviços
+### Check the Services
 
-Após iniciar os containers, certifique-se de que os seguintes serviços estão disponíveis:
+After starting the containers, make sure the following services are available:
 
-- **Gateway**: [http://localhost:5188](http://localhost:5188)  
-- **RabbitMQ**: [http://localhost:15672](http://localhost:15672)  
-  - Usuário: `guest`
-  - Senha: `guest`
+- **Gateway**: [http://localhost:5188](http://localhost:5188)
+- **RabbitMQ**: [http://localhost:15672](http://localhost:15672)
+- Username: `guest`
+- Password: `guest`
 
-### Configure as Variáveis de Ambiente
+### Set the Environment Variables
 
-Certifique-se de que as variáveis de ambiente estão configuradas corretamente para os serviços.
+Make sure the environment variables are set correctly for the services.
 
 #### RabbitMQ
-- `RabbitMQ__Host`: `rabbitmq`  
-- `RabbitMQ__User`: `guest`  
+- `RabbitMQ__Host`: `rabbitmq`
+- `RabbitMQ__User`: `guest`
 - `RabbitMQ__Password`: `guest`
 
 #### MongoDB
-- `Storage__MongoDb__ConnectionString`: `mongodb://admin:admin@snack-hub-mongodb:27017/`  
-- `Storage__MongoDb__Database`: Nome do banco correspondente.
+- `Storage__MongoDb__ConnectionString`: `mongodb://admin:admin@snack-hub-mongodb:27017/`
+- `Storage__MongoDb__Database`: Name of the corresponding database.
 
 #### PostgreSQL
-- `Storage__PostgreSQL__Host`: `snack-hub-db`  
-- `Storage__PostgreSQL__User`: `postgres`  
-- `Storage__PostgreSQL__Password`: `postgres`  
-- `Storage__PostgreSQL__Database`: Nome do banco correspondente.
+- `Storage__PostgreSQL__Host`: `snack-hub-db`
+- `Storage__PostgreSQL__User`: `postgres`
+- `Storage__PostgreSQL__Password`: `postgres`
+- `Storage__PostgreSQL__Database`: Name of the corresponding database.
 
 ---
 
-## Testando as APIs
+## Testing the APIs
 
-Os arquivos `.http` disponíveis no projeto contêm exemplos de requisições para testar as APIs. Use ferramentas como o [Rest Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) no Visual Studio Code.
+The `.http` files available in the project contain sample requests to test the APIs. Use tools like the [Rest Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) in Visual Studio Code.
 
-### Exemplos de Requisições
+### Request Examples
 
 #### Auth API
 
-- **`POST /signup`**  
-  Exemplo de payload:  
-  ```json
-  {
-    "name": "John Doe",
-    "cpf": "61189242010",
-    "email": "rosquinha@mail.com"
-  }
-  ```
+- **`POST /signup`**
+Payload example:
+```json
+{
+"name": "John Doe",
+"cpf": "61189242010",
+"email": "rosquinha@mail.com"
+}
+```
 
-- **`POST /signin`**  
-  Exemplo de payload:  
-  ```json
-  {
-    "cpf": "61189242010"
-  }
-  ```
+- **`POST /signin`**
+Payload example:
+```json
+{
+"cpf": "61189242010"
+}
+```
 
 ---
 
 #### Order API
 
-- **`POST /Confirm`**  
-  Exemplo de payload:  
-  ```json
-  {
-    "clientId": "1a296169-ac6e-431d-ae8e-148b6a458c93",
-    "items": [
-      {
-        "productId": "0a2a1d42-5b08-45d7-83c8-5b9bb25b0aaa",
-        "quantity": 3
-      }
-    ]
-  }
-  ```
+- **`POST /Confirm`**
+Payload example:
+```json
+{
+"clientId": "1a296169-ac6e-431d-ae8e-148b6a458c93",
+"items": [
+ {
+ "productId": "0a2a1d42-5b08-45d7-83c8-5b9bb25b0aaa",
+ "quantity": 3
+ }
+ ]
+ }
+ ```
 
 ---
 
 #### Product API
 
-- **`POST /`**  
-  Exemplo de payload:  
-  ```json
-  {
-    "name": "Coca-Cola",
-    "category": 2,
-    "price": 7.45,
-    "description": "Coca geladinha!"
-  }
-  ```
+- **`POST /`**
+ Payload example:
+ ```json
+ {
+ "name": "Coca-Cola",
+ "category": 2,
+ "price": 7.45,
+ "description": "Cold Coke!"
+ }
+ ```
 
 ---
 
 #### Production API
 
-- **`POST /CreateProductionOrder`**  
-  Exemplo de payload:  
-  ```json
-  {
-    "orderId": "{Order Id}",
-    "items": [
-      {
-        "productId": "{product-id}",
-        "quantity": 2
-      }
-    ]
-  }
-  ```
+- **`POST /CreateProductionOrder`**
+ Payload example:
+ ```json
+ {
+ "orderId": "{Order Id}",
+ "items": [
+ {
+ "productId": "{product-id}",
+ "quantity": 2
+ }
+ ]
+ }
+ ```
 
 ---
 
-## Serviços Disponíveis
+## Available Services
 
-- **`snack-hub-order-app`**  
-  - Porta: `5688`  
-  - Banco: MongoDB (`snack-hub-order`)
+- **`snack-hub-order-app`**
+ - Port: `5688`
+ - Bank: MongoDB (`snack-hub-order`)
 
-- **`snack-hub-payment-app`**  
-  - Porta: `5689`  
-  - Banco: PostgreSQL (`snack-hub-payment`)
+- **`snack-hub-payment-app`**
+ - Port: `5689`
+ - Bank: PostgreSQL (`snack-hub-payment`)
 
-- **`snack-hub-gateway`**  
-  - Porta: `5188`
-
----
-
-## Observações
-
-- Certifique-se de que todas as APIs estão funcionando corretamente antes de avançar para as integrações.  
-- Para mais informações sobre os serviços, consulte a documentação específica de cada API.
+- **`snack-hub-gateway`**
+ - Port: `5188`
 
 ---
 
-## Licença
+## Notes
 
-Este projeto está licenciado sob a [MIT License](LICENSE).
+- Make sure all APIs are working properly before moving on to integrations.
+
+- For more information about services, see the specific documentation for each API.
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
