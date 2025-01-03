@@ -78,8 +78,10 @@ More about the Message Broker events catalog [here](https://github.com/Team-One-
 ## How to Run
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/Team-One-Pos-Tech/SnackHub.ApiGateway.git
+```
 
 ### Start the Docker Containers
 
